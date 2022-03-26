@@ -6,13 +6,13 @@ router.get('/', (req, res) => {
         city: 'Seattle',
         state: 'WA',
         cuisines: 'Thai, Pan-Asian',
-        pic: 'https://placekitten.com/250/250'
+        pic: '/images/almonds.jpg',
     }, {
         name: 'Coding Cat Cafe',
         city: 'Phoenix',
         state: 'AZ',
         cuisines: 'Coffee, Bakery',
-        pic: 'https://placekitten.com/250/250'
+        pic: '/images/ricardo cat.jpg'
     }, {
         name: 'Placeholder',
         city: 'Placeholder',
