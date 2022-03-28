@@ -1,9 +1,15 @@
 const router = require('express').Router()
 
+
+// GET /new
 router.get('/new', (req, res) => {
     res.render('places/new')
   })
+  router.post('/new', (req, res) => {
+      res.send('POST /new')
+    })
 
+  //GET INDEX
 router.get('/', (req, res) => {
     let places = [{
         name: 'H-Thai-ML',
@@ -26,6 +32,10 @@ router.get('/', (req, res) => {
     }]
     res.render('places/index', {places})
 })
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.send('POST /places')
+  })
 
 
 module.exports = router
