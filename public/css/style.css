@@ -38,3 +38,11 @@ main {
   margin-left: 20px;
   background-color: white;
 }
+
+h2 {
+  color: skyblue;
+}
+
+div {
+  padding: 2px;
+}
