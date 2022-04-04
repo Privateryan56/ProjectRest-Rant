@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../models");
 
+
 //INDEX Route
 router.get("/", (req, res) => {
   db.Place.find()
