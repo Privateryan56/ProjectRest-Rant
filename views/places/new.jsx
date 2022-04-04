@@ -5,7 +5,8 @@ function new_form() {
   return (
     <Def>
       <main>
-        <h1>Add a New Place</h1>
+        <h1>Add a new place</h1>
+        <h2>{message}</h2>
         <form method="POST" action="/places">
           <div className="form-group">
             <label htmlFor="name">Place Name</label>
@@ -32,7 +33,17 @@ function new_form() {
               required
             />
           </div>
-          <input className= "btn btn-primary" type="submit" value="Add Place" />
+          <div className="form-group">
+            <label htmlFor="founded">Founded Year</label>
+            <input
+              type="number"
+              className="form-control"
+              id="founded"
+              name="founded"
+              value={new Date().getFullYear}
+            />
+          </div>
+          <input className="btn btn-primary" type="submit" value="Add Place" />
         </form>
       </main>
     </Def>
