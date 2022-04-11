@@ -1,32 +1,19 @@
-//require react
 const React = require("react");
 const Def = require("../default");
 
 function show(data) {
   let comments = <h3 className="inactive">No comments yet!</h3>;
+  let rating = <h3 className="inactive">Not yet rated</h3>;
   if (data.place.comments.length) {
-    comments = data.place.comments.map((c) => {
-      return (
-        <div className="border">
-          <h2 className="rant">{c.rant ? "Rant! 😡" : "Rave! 😻"} </h2>
-          <h4>{c.content} </h4>
-          <h3>
-            <strong>- {c.author} </strong>
-          </h3>
-          <h4>Rating: {c.stars} </h4>
-          <form
-            method="POST"
-            action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}
-          >
-            <input
-              type="submit"
-              className="btn btn-danger"
-              value="Delete Comment"
-            />
-          </form>
-        </div>
-      );
-    });
+    let sumRatings = data.place.comments.reduce((tot, c) => {
+      return tot + c.stars;
+    }, 0);
+    let averageRating = Math.round(sumRatings / data.place.comments.length);
+    let stars = "";
+    for (let i = 0; i < averageRating; i++) {
+      stars += "⭐️";
+    }
+    rating = <h3>{stars} stars</h3>;
   }
   return (
     <Def>
@@ -45,6 +32,11 @@ function show(data) {
             <h2>Description</h2>
             <h3>{data.place.showEstablished()}</h3>
             <h4> Serving {data.place.cuisines}</h4>
+            <br />
+            <hr />
+            <h2>Comments</h2>
+            <p> {comments} </p>
+
             <br />
             <hr />
             <h2>Leave a Comment!</h2>
@@ -76,30 +68,22 @@ function show(data) {
                     className="form-control"
                   />
                 </div>
-                <div className="form-check form-switch form-group col-sm-2 ">
+                <div className="form-group col-sm-2">
                   <label htmlFor="rant">Rant?</label>
-                  <div className="d-flex justify-content-center">
-                    <input
-                      type="checkbox"
-                      id="rant"
-                      name="rant"
-                      className="form-check-input"
-                    />
-                  </div>
+                  <input
+                    type="checkbox"
+                    id="rant"
+                    name="rant"
+                    className="form-control"
+                  />
                 </div>
               </div>
               <input
                 type="submit"
                 className="btn btn-primary"
-                value="Add comment"
+                value="Add Comment"
               />
             </form>
-            <br />
-            <h2>Comments</h2>
-            {comments}
-
-            <br />
-            <hr />
             <a href={`/places/${data.id}/edit`} className="btn btn-warning">
               Edit
             </a>
